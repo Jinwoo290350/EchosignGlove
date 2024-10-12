@@ -1,7 +1,6 @@
 
 ### Project EchosignGlove
 ### ESP32 Sensor Data to Character Prediction Model with Text-to-Speech
-- Wound dataset: [https://www.kaggle.com/datasets/datamunge/sign-language-mnist](https://www.kaggle.com/datasets/datamunge/sign-language-mnist)
 
 This project consists of three main components:
 
@@ -25,31 +24,14 @@ This project consists of three main components:
 
 ## Model Results
 
-The project utilizes a pre-trained **EfficientNetB3** model to predict alphabetic characters (A-Z) based on sensor inputs from an IMU and a Flex Sensor connected to an ESP32 microcontroller. Below are the results and performance metrics of the model.
-
 ### Dataset Overview
-
-- **Total Samples**: *[Insert total number of samples]*
+- Wound dataset: [https://www.kaggle.com/datasets/datamunge/sign-language-mnist](https://www.kaggle.com/datasets/datamunge/sign-language-mnist)
 - **Classes**: 26 (Letters A-Z)
 - **Data Split**:
   - Training Set: 70%
   - Validation Set: 15%
   - Test Set: 15%
 
-### Model Performance
-
-- **Training Accuracy**: *[Insert training accuracy, e.g., 98%]*
-- **Validation Accuracy**: *[Insert validation accuracy, e.g., 95%]*
-- **Test Accuracy**: *[Insert test accuracy, e.g., 94%]*
-- **Training Loss**: *[Insert training loss value]*
-- **Validation Loss**: *[Insert validation loss value]*
-- **Test Loss**: *[Insert test loss value]*
-
-### Confusion Matrix
-
-![Confusion Matrix](path/to/confusion_matrix.png)
-
-*The confusion matrix illustrates the model's performance across different classes, showing where misclassifications occur.*
 
 ### Classification Report
 
@@ -60,14 +42,6 @@ The project utilizes a pre-trained **EfficientNetB3** model to predict alphabeti
 | ...   | ...       | ...    | ...      |
 | Z     | *0.96*    | *0.95* | *0.95*   |
 | **Average** | **0.96** | **0.96** | **0.96** |
-
-*Replace the placeholder values with actual metrics from your model.*
-
-### ROC Curve
-
-![ROC Curve](path/to/roc_curve.png)
-
-*The ROC curve shows the true positive rate versus the false positive rate for each class.*
 
 ### Sample Predictions
 
@@ -80,8 +54,6 @@ Here are some examples of the model's predictions on the test set:
 | *0.20*   | *0.70*    | C          | D               | ❌      |
 | *0.80*   | *0.40*    | D          | D               | ✅      |
 | *...*    | *...*     | ...        | ...             | ...     |
-
-*Note: Replace sample data with actual values from your test results.*
 
 ### Interpretation of Results
 
