@@ -2,6 +2,7 @@
 ### Project EchosignGlove
 ### ESP32 Sensor Data to Character Prediction Model with Text-to-Speech
 - Wound dataset: [https://www.kaggle.com/datasets/datamunge/sign-language-mnist](https://www.kaggle.com/datasets/datamunge/sign-language-mnist)
+
 This project consists of three main components:
 
 1. **ESP32 Sensor Data Collection:**
