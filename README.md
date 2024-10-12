@@ -26,6 +26,9 @@ This project consists of three main components:
 
 ### Dataset Overview
 - Wound dataset: [https://www.kaggle.com/datasets/datamunge/sign-language-mnist](https://www.kaggle.com/datasets/datamunge/sign-language-mnist)
+  
+  ![Refer](https://github.com/user-attachments/assets/3fc51a91-d52c-4a84-89f3-6f300bb1110a)
+  
 - **Classes**: 26 (Letters A-Z)
 - **Data Split**:
   - Training Set: 70%
