@@ -1,88 +1,78 @@
+# ESP32 Flex Sensor Gesture Recognition with Bluetooth & TTS
 
-### Project EchosignGlove
-### ESP32 Sensor Data to Character Prediction Model with Text-to-Speech
+This project allows an ESP32 to read data from flex sensors attached to five fingers, recognize hand gestures using AI, and send the recognized gestures to a mobile phone via Bluetooth. The mobile phone then uses Text-to-Speech (TTS) to convert the recognized gesture into audible speech.
 
-This project consists of three main components:
+## Features
+- **Flex Sensor Integration**: Detects bending of fingers using flex sensors.
+- **Bluetooth Communication**: Sends sensor data from ESP32 to a mobile phone.
+- **AI Gesture Recognition**: Uses a trained AI model to recognize hand gestures.
+- **Text-to-Speech (TTS)**: Converts recognized gestures into speech on the mobile phone.
 
-1. **ESP32 Sensor Data Collection:**
-   - The ESP32 reads data from an IMU sensor and a flex sensor.
-   - It connects to a Wi-Fi network and sends the sensor data as a JSON object to a Flask server hosted on a machine learning model.
-   
-2. **Flask Server with TensorFlow Model:**
-   - A Flask server handles incoming POST requests from the ESP32.
-   - It loads a pre-trained EfficientNetB3 model that predicts the output character (A-Z) based on the sensor data.
-   - The server returns the predicted character as a JSON response.
+## Components
+- **ESP32**: Microcontroller used to read flex sensor data and send it via Bluetooth.
+- **Flex Sensors**: Attached to five fingers (thumb, index, middle, ring, pinky) to detect their bending positions.
+- **Mobile Phone**: Receives data via Bluetooth and performs gesture recognition and TTS.
 
-3. **Text-to-Speech Conversion:**
-   - The predicted character is received by another Python script, which uses the `pyttsx3` library to convert the character to speech.
-   - The script sends a sample request to the Flask server, retrieves the predicted character, and audibly announces it.
+## Project Structure
+```
+/ESP32_Flex_Sensor
+├── src
+│   ├── esp32_flex_sensor.ino        # ESP32 code to read sensor data and send via Bluetooth
+│   └── model_training.ipynb          # Notebook for AI model training (optional)
+├── app
+│   ├── MainActivity.java             # Android code to receive Bluetooth data and use TTS
+│   └── tts_service.java              # Android service for Text-to-Speech
+├── models
+│   └── gesture_model.tflite          # Trained TensorFlow Lite model for gesture recognition
+└── README.md                         # Project documentation
+```
 
-### Key Features:
-- Wi-Fi-enabled ESP32 microcontroller for wireless data transmission.
-- Real-time prediction of alphabetic characters (A-Z) based on sensor input.
-- Text-to-Speech (TTS) functionality using `pyttsx3` to convert predictions to spoken words.
+## Getting Started
 
-## Model Results
+### 1. Hardware Setup
+- Attach flex sensors to each of the five fingers (thumb, index, middle, ring, pinky).
+- Connect the flex sensors to the analog input pins of the ESP32.
 
-### Dataset Overview
-- Wound dataset: [https://www.kaggle.com/datasets/datamunge/sign-language-mnist](https://www.kaggle.com/datasets/datamunge/sign-language-mnist)
+### 2. ESP32 Setup
+- Flash the `esp32_flex_sensor.ino` to your ESP32.
+- The code will read the analog values from the flex sensors and send them as a comma-separated string via Bluetooth to the paired mobile phone.
   
-  ![Refer](https://github.com/user-attachments/assets/3fc51a91-d52c-4a84-89f3-6f300bb1110a)
-  
-- **Classes**: 26 (Letters A-Z)
-- **Data Split**:
-  - Training Set: 70%
-  - Validation Set: 15%
-  - Test Set: 15%
+**Example:**
+```cpp
+34,35,32,33,25
+```
 
+### 3. Mobile Application
+- Develop an Android app (or use the example provided) that can connect to the ESP32 via Bluetooth.
+- Implement AI gesture recognition using TensorFlow Lite, or use simple conditional statements based on the sensor values.
+- Use the TTS feature on the phone to convert recognized gestures into speech.
 
-### Classification Report
+### 4. AI Model Training
+- Collect data from the flex sensors for various gestures (as shown in the image).
+- Train a TensorFlow model using this data to recognize specific gestures.
+- Convert the trained model to TensorFlow Lite format and deploy it to the mobile app.
 
-| Class | Precision | Recall | F1-Score |
-|-------|-----------|--------|----------|
-| A     | *0.97*    | *0.98* | *0.97*   |
-| B     | *0.95*    | *0.94* | *0.94*   |
-| ...   | ...       | ...    | ...      |
-| Z     | *0.96*    | *0.95* | *0.95*   |
-| **Average** | **0.96** | **0.96** | **0.96** |
+### 5. Running the Project
+- Power the ESP32 and make sure it’s connected to the flex sensors.
+- Pair the mobile phone with the ESP32 via Bluetooth.
+- The mobile app will receive the sensor data, recognize the gesture, and speak out the corresponding text.
 
-### Sample Predictions
+## Example Gestures
+- **A**: Thumb up
+- **B**: Hand in a fist
+- **C**: Open hand
+- **D**: Pointing with index finger
 
-Here are some examples of the model's predictions on the test set:
+## Dependencies
+- **Arduino IDE**: For flashing code to the ESP32.
+- **Android Studio**: For developing the mobile app (if using Android).
+- **TensorFlow Lite**: For running the AI model on the mobile phone.
+- **TextToSpeech API**: For converting recognized text into speech.
 
-| IMU Data | Flex Data | True Label | Predicted Label | Correct |
-|----------|-----------|------------|-----------------|---------|
-| *0.45*   | *0.30*    | A          | A               | ✅      |
-| *0.60*   | *0.50*    | B          | B               | ✅      |
-| *0.20*   | *0.70*    | C          | D               | ❌      |
-| *0.80*   | *0.40*    | D          | D               | ✅      |
-| *...*    | *...*     | ...        | ...             | ...     |
+## Future Work
+- Implement gesture recognition for more complex hand gestures.
+- Improve the accuracy of the AI model with more training data.
+- Add support for iOS using CoreBluetooth and AVSpeechSynthesizer for TTS.
 
-### Interpretation of Results
-
-- The model demonstrates high accuracy in predicting alphabetic characters based on the sensor inputs.
-- Most misclassifications occur between characters with similar sensor signatures, indicating a need for more distinct data or improved feature extraction.
-- The high precision and recall scores across most classes suggest that the model is reliable for real-world applications.
-
-### Limitations
-
-- **Sensor Variability**: Inconsistencies in sensor readings due to environmental factors or hardware limitations may affect the model's performance.
-- **Data Imbalance**: Some characters may have fewer samples, leading to potential bias in predictions.
-- **Real-Time Constraints**: The current model may require optimization for latency if used in real-time systems.
-
-### Future Work
-
-- **Data Augmentation**: Enhance the dataset with augmented data to improve model generalization.
-- **Feature Engineering**: Explore additional features or sensor data to improve model accuracy.
-- **Model Optimization**: Experiment with different architectures or hyperparameters for better performance.
-- **Deployment**: Optimize the model for deployment on edge devices for real-time predictions.
-
-### Conclusion
-
-The EfficientNetB3 model effectively predicts alphabetic characters using sensor data from the ESP32-connected IMU and Flex Sensor. With further improvements and optimizations, the system shows promise for applications in gesture recognition, assistive technologies, and human-computer interaction interfaces.
-
-### How to Use:
-1. Flash the ESP32 script to your device.
-2. Run the Flask server with the pre-trained EfficientNetB3 model.
-3. Execute the TTS script to hear the predicted characters.
-
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
