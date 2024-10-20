@@ -19,6 +19,7 @@ This project allows an ESP32 to read data from flex sensors attached to five fin
 ├── src
 │   ├── esp32_flex_sensor.ino        # ESP32 code to read sensor data and send via Bluetooth
 │   └── model_training.ipynb          # Notebook for AI model training (optional)
+    └── model_training(HaveData).ipynb          # Notebook for AI model training (HaveData)
 ├── app
 │   ├── MainActivity.java             # Android code to receive Bluetooth data and use TTS
 │   └── tts_service.java              # Android service for Text-to-Speech
