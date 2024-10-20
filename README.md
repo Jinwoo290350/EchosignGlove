@@ -3,7 +3,7 @@
 This project allows an ESP32 to read data from flex sensors attached to five fingers, recognize hand gestures using AI, and send the recognized gestures to a mobile phone via Bluetooth. The mobile phone then uses Text-to-Speech (TTS) to convert the recognized gesture into audible speech.
 
 ## Result of standard models
-### Why we use Keras in library TensorFlow 
+### Use Keras in library TensorFlow 
 * Accuracy: 0.7525
 * ![image](https://github.com/user-attachments/assets/5d27a5e4-3fd0-46be-9841-2ab5c9a1e553) ![image](https://github.com/user-attachments/assets/28d3dfa0-c209-47b2-8c1d-9d03eabaad7a) ![image](https://github.com/user-attachments/assets/4ea06245-b085-4cd8-9314-0829a884086c)
 
